@@ -1,4 +1,6 @@
 import { IndexedTx, StargateClient } from "@cosmjs/stargate"
+import { Tx } from "cosmjs-types/cosmos/tx/v1beta1/tx"
+
 
 const rpc = "rpc.sentry-01.theta-testnet.polypore.xyz:26657";
 
@@ -19,6 +21,8 @@ const runAll = async(): Promise<void> => {
     ))!
 
     console.log("Faucet Tx:", faucetTx)
+    const decodedTx: Tx = Tx.decode(faucetTx.tx)
+    console.log("DecodedTx:", decodedTx)
 }
 
 runAll()
