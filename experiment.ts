@@ -29,6 +29,9 @@ const runAll = async(): Promise<void> => {
     // deserialize the message
     const sendMessage: MsgSend = MsgSend.decode(decodedTx.body!.messages[0].value)
     console.log("Sent message:", sendMessage)
+
+    const faucet: string = sendMessage.fromAddress
+    console.log("Faucet balances:", await client.getAllBalances(faucet))
 }
 
 runAll()
