@@ -21,7 +21,7 @@ const runAll = async (): Promise<void> => {
     // get All Balances
     console.log(
         "Alice balances:",
-        await client.getAllBalances("cosmos1gd3lmm3p3rv2g5nuvz7vxpcmemuc4czwjrs5hp") // <-- replace with your generated address
+        await client.getAllBalances("cosmos1l4k7srqh45w9lgdtnagm7heagjm6tq6hmwavdf") // <-- replace with your generated address
     )
 
     // Get the faucet address
@@ -53,6 +53,19 @@ const runAll = async (): Promise<void> => {
         ", height:",
         await signingClient.getHeight()
     )
+
+    // Send tokens
+    console.log("Gas fee:", decodedTx.authInfo!.fee!.amount)
+    console.log("Gas limit:", decodedTx.authInfo!.fee!.gasLimit.toString(10))
+    console.log("Alice balance before:", await client.getAllBalances(alice))
+    console.log("Faucet balance before:", await client.getAllBalances(faucet))
+    const result = await signingClient.sendTokens(alice, faucet, [{ denom: "uatom", amount: "100000" }], {
+        amount: [{ denom: "uatom", amount: "500" }],
+        gas: "200000",
+    })
+    console.log("Transfer result:", result)
+    console.log("Alice balance after:", await client.getAllBalances(alice))
+    console.log("Faucet balance after:", await client.getAllBalances(faucet))
 }
 
 runAll()

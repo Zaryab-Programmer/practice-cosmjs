@@ -8,4 +8,4 @@ const generateKey = async (): Promise<void> => {
 }
 
 generateKey()
-// cosmos1gd3lmm3p3rv2g5nuvz7vxpcmemuc4czwjrs5hp
+// cosmos1l4k7srqh45w9lgdtnagm7heagjm6tq6hmwavdf
